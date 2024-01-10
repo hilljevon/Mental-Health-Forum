@@ -3,9 +3,6 @@ import { AllThreadPostProps } from '@/lib/types/types'
 import Link from 'next/link'
 import React from 'react'
 import AddCommentToPost from '../forms/AddCommentToPost'
-import { Comment } from 'semantic-ui-react'
-import { StarIcon } from '@heroicons/react/20/solid'
-import { Button } from '../ui/button'
 import { deletePost } from '@/lib/actions/thread.actions'
 import { usePathname, useRouter } from 'next/navigation'
 import { useToast } from '../ui/use-toast'
@@ -103,20 +100,6 @@ const ShowPost = ({ post, isOwner, clerkId }: { post: AllThreadPostProps, isOwne
                         <p>
                             <time dateTime={comment.createdAt}>{comment.createdAt.split('T')[0]}</time>
                         </p>
-
-                        {/* <div className="mt-4 flex items-center">
-                            {[0, 1, 2, 3, 4].map((rating) => (
-                                <StarIcon
-                                    key={rating}
-                                    className={classNames(
-                                        5 > rating ? 'text-yellow-400' : 'text-gray-300',
-                                        'h-5 w-5 flex-shrink-0'
-                                    )}
-                                    aria-hidden="true"
-                                />
-                            ))}
-                        </div>
-                        <p className="sr-only">5 out of 5 stars</p> */}
 
                         <div
                             className="prose prose-sm mt-2 max-w-none text-gray-500"

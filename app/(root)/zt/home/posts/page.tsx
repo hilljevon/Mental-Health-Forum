@@ -11,7 +11,6 @@ const page = async () => {
         clerkId: clerkUser.id || '',
         username: clerkUser.username || ''
     }
-    console.log(clerkUser)
     const allThreads = await fetchAllThreadPosts()
     const mongoId = await fetchUserByClerk(clerkUser.id)
     return (

@@ -1,28 +1,16 @@
 'use client'
 // ******************************* CURRENT *******************************
 import React, { Fragment, useEffect } from 'react'
-import { Menu, Popover, Transition } from '@headlessui/react'
+import { Menu, Transition } from '@headlessui/react'
 import {
     ChatBubbleLeftEllipsisIcon,
     CodeBracketIcon,
     EllipsisVerticalIcon,
-    EyeIcon,
     FlagIcon,
     HandThumbUpIcon,
-    MagnifyingGlassIcon,
-    PlusIcon,
     ShareIcon,
     StarIcon,
 } from '@heroicons/react/20/solid'
-import {
-    ArrowTrendingUpIcon,
-    Bars3Icon,
-    BellIcon,
-    FireIcon,
-    HomeIcon,
-    UserGroupIcon,
-    XMarkIcon,
-} from '@heroicons/react/24/outline'
 import { AllThreadPostProps } from '@/lib/types/types'
 import { useUserContext } from '@/lib/contexts/UserProvider'
 import Link from 'next/link'
