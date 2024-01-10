@@ -15,7 +15,6 @@ export async function createCommunity(newCommunityObject: NewCommunityProps, cle
             admin: [mongoUser._id],
             moderators: [mongoUser._id]
         })
-        console.log('NEW COMMUNITY CREATED!!', community)
         revalidatePath(path)
     } catch (error: any) {
         throw new Error(`Unable to create new community! Error here: ${error.message}`)
