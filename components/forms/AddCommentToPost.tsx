@@ -24,6 +24,7 @@ import {
     FormMessage,
 } from "@/components/ui/form"
 import { addComment } from "@/lib/actions/thread.actions"
+import { MongoUserProps } from "@/lib/types/types"
 const moods = [
     { name: 'Excited', value: 'excited', icon: FireIcon, iconColor: 'text-white', bgColor: 'bg-red-500' },
     { name: 'Loved', value: 'loved', icon: HeartIcon, iconColor: 'text-white', bgColor: 'bg-pink-400' },
@@ -39,7 +40,7 @@ function classNames(...classes: any) {
 const formSchema = z.object({
     title: z.string().min(3),
 })
-export default function AddCommentToPost({ postId, clerkId }: { postId: string, clerkId: string }) {
+export default function AddCommentToPost({ postId, clerkId, mongoUser }: { postId: string, clerkId: string, mongoUser: MongoUserProps }) {
     const [selected, setSelected] = useState(moods[5])
     const path = usePathname()
     const router = useRouter()
@@ -58,12 +59,13 @@ export default function AddCommentToPost({ postId, clerkId }: { postId: string, 
         const newComment = await addComment(submitObject, path)
         form.reset()
     }
+    console.log('MY MONGO USER HERE INSIDE ADD COMMENT', mongoUser)
     return (
         <div className="flex items-start space-x-4 mt-8 mb-4">
             <div className="flex-shrink-0">
                 <img
                     className="inline-block h-10 w-10 rounded-full"
-                    src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                    src={mongoUser.profileImg}
                     alt=""
                 />
             </div>

@@ -1,5 +1,5 @@
 'use client'
-import { AllThreadPostProps } from '@/lib/types/types'
+import { AllThreadPostProps, MongoUserProps } from '@/lib/types/types'
 import Link from 'next/link'
 import React from 'react'
 import AddCommentToPost from '../forms/AddCommentToPost'
@@ -40,7 +40,7 @@ const reviews = {
 function classNames(...classes: any) {
     return classes.filter(Boolean).join(' ')
 }
-const ShowPost = ({ post, isOwner, clerkId }: { post: AllThreadPostProps, isOwner: boolean, clerkId: string }) => {
+const ShowPost = ({ post, isOwner, clerkId, mongoUser }: { post: AllThreadPostProps, isOwner: boolean, clerkId: string, mongoUser: MongoUserProps }) => {
     const path = usePathname()
     const router = useRouter()
     const { toast } = useToast()
@@ -76,7 +76,7 @@ const ShowPost = ({ post, isOwner, clerkId }: { post: AllThreadPostProps, isOwne
                     <p className="mt-3 line-clamp-3 text-sm leading-6 text-gray-600">{post.description}</p>
                 </div>
                 <div className="relative mt-4 flex items-center gap-x-4">
-                    <img src='https://images.unsplash.com/photo-1500462918059-b1a0cb512f1d?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' alt="" className="h-10 w-10 rounded-full bg-gray-50" />
+                    <img src={post.author.profileImg} alt="" className="h-10 w-10 rounded-full bg-gray-50" />
                     <div className="text-sm leading-6">
                         <p className="font-semibold text-gray-900">
                             <a href={`/zt/user/${post.author}`}>
@@ -88,12 +88,12 @@ const ShowPost = ({ post, isOwner, clerkId }: { post: AllThreadPostProps, isOwne
                     </div>
                 </div>
             </article>
-            <AddCommentToPost postId={post._id} clerkId={clerkId} />
+            <AddCommentToPost postId={post._id} clerkId={clerkId} mongoUser={mongoUser} />
             <h3 className="sr-only">Customer Reviews</h3>
             {post.children.map((comment, commentIdx) => (
                 <div key={comment._id} className="flex space-x-4 text-sm w-full text-gray-500 ">
                     <div className="flex-none py-5">
-                        <img src='https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80' alt="" className="h-10 w-10 rounded-full bg-gray-100" />
+                        <img src={comment.author.profileImg} alt="" className="h-10 w-10 rounded-full bg-gray-100" />
                     </div>
                     <div className={classNames(commentIdx === 0 ? '' : 'border-t border-gray-200 w-full', 'py-5')}>
                         <h3 className="font-medium text-gray-900">@{comment.author.username}</h3>
@@ -111,5 +111,5 @@ const ShowPost = ({ post, isOwner, clerkId }: { post: AllThreadPostProps, isOwne
         </>
     )
 }
-
+// AUTHOR USERNAME, AUTHOR MONGO ID, AUTHOR PROFILE IMG
 export default ShowPost

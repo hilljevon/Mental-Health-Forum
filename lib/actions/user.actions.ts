@@ -15,6 +15,7 @@ export async function createUser(newUser: NewUserProps, path: string) {
         throw new Error(`Cannot create new user! Error: ${error.message}`)
     }
 }
+// ONLY FETCHES MONGO ID
 export async function fetchUserByClerk(clerkId: string) {
     try {
         connectToDb()
@@ -22,6 +23,16 @@ export async function fetchUserByClerk(clerkId: string) {
         return await JSON.parse(JSON.stringify(mongoUser._id))
     } catch (error: any) {
         throw new Error(`Unable to fetch user by ClerkId. Error here: ${error.message}`)
+    }
+}
+// FETCHES FULL MONGO USER
+export async function fetchMongoUserByClerk(clerkId: string) {
+    try {
+        connectToDb()
+        const mongoUser = await User.findOne({ clerkId: clerkId })
+        return await JSON.parse(JSON.stringify(mongoUser))
+    } catch (error: any) {
+        throw new Error(`Unable to find Mongo User by ClerkId. Error here: ${error.message}`)
     }
 }
 export async function fetchUserProfile(mongoId: string) {

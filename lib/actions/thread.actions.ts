@@ -77,7 +77,7 @@ export async function fetchThreadById(clerkId: string, postId: string) {
                     populate: {
                         path: 'author',
                         model: User,
-                        // select: '_id name parentId image'
+                        select: '_id firstName lastName parentId profileImg username'
                     }
                 }
             ]
